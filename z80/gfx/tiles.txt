@@ -1,0 +1,25 @@
+BANK0
+—————————————
+0-11:    Lower HUD BG
+12-15:   
+16-25:   Numbers, blue bg
+26-27:   Title (key)
+28-31:   Title (health)
+32-53:   Numbers big
+54-78:
+79-87:   Face1
+88-96:   Face2
+97-111:  
+112-114: Upper HUD BG
+115-127: Upper HUD
+
+
+
+BANK1
+—————————————
+0-14:	 Weapon icon for status bar
+15-95:	 Weapon tiles for fps view (frame0-3)
+113-114: Key
+
+
+

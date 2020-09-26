@@ -1,0 +1,10 @@
+maps/map1_0.flr
+maps/map1_1.flr
+maps/map1_2.flr
+maps/map1_3.flr
+maps/map1_4.flr
+maps/map1_5.flr
+maps/map1_6.flr
+maps/map1_7.flr
+maps/map1_8.flr
+maps/map1_9.flr

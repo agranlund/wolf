@@ -1,0 +1,21 @@
+Part		Device/Value		Package
+------------------------------------------------
+MBC1B		Nintendo MBC1		
+KE04Z128	KE04Z128VLD4		TQFP44
+CY7C144E	CY7C144E-55AXC		TQFP64
+AM29F040J	AM29F040J		PLCC32R
+C1		0.1uF			0805
+C2		0.1uF			0805
+C3		0.1uF			0805
+C4		0.1uF			0805
+C5		0.1uF			0805
+C6		1.0uF			0805
+C7		0.1uF			0805
+C8		0.1uF			0805
+C9		1.0uF			0805
+R1		47k			0805
+R2		47k			0805
+R3		47k			0805
+R4		47k			0805
+R5		47k			0805
+R6		47k			0805

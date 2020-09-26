@@ -1,0 +1,51 @@
+
+*00:	Attack: Knife
+*01:	Attack: Gun
+*02:	Attack: Machine Gun
+*03:	Attack: Minigin
+ 
+ 04:	Take damage
+*05:	Open Door
+*06:	Push wall
+*07:	Elevator switch
+*08:	Score counter
+*09:	Interact with nothing
+*0A:	Door is locked
+ 0B:	Victory
+ 0C:	Gameover
+ 0D:
+ 0E:
+ 0F:
+*10:	Pickup: Ammo
+*11:	Pickup: Medkit
+*12:	Pickup: Food
+*13:	Pickup: Gun
+*14:	Pickup: Dogfood
+*15:	Pickup: ExtraLife
+*16:	Pickup: Bonus1
+*17:	Pickup: Bonus2
+*18:	Pickup: Key
+ 19:
+ 1A:
+ 1B:
+ 1C:
+ 1D:
+ 1E: 
+ 1F:
+*20:	Enemy Dog: Alert
+*21:	Enemy Dog: Attack
+ 22:	Enemy Dog: Wound
+*23:	Enemy Dog: Die
+*24:	Enemy Guard: Alert
+*25:	Enemy Guard: Attack
+ 26:	Enemy Guard: Wound
+*27:	Enemy Guard: Die
+*28:	Enemy SS: Alert
+*29:	Enemy SS: Attack
+ 2A:	Enemy SS: Wound
+*2B:	Enemy SS: Die
+*2C:	Enemy Boss: Alert
+*2D:	Enemy Boss: Attack
+ 2E:	Enemy Boss: Wound
+*2F:	Enemy Boss: Die
+

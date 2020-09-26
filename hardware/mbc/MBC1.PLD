@@ -1,0 +1,200 @@
+Name     MBC1 ;
+PartNo   00 ;
+Date     2017-06-01 ;
+Revision 01 ;
+Designer Anders Granlund ;
+Company  www.happydaze.se ;
+Assembly None ;
+Location  ;
+Device   f1502isptqfp44;
+
+PROPERTY ATMEL{JTAG=on};
+PROPERTY ATMEL{TDI_pullup=on};
+PROPERTY ATMEL{TMS_pullup=on};
+PROPERTY ATMEL{pd1=off};
+PROPERTY ATMEL{pd2=off};
+PROPERTY ATMEL{pin_keep=on};
+PROPERTY ATMEL{security=off};
+PROPERTY ATMEL{output_fast=off};
+
+/*
+------------------------------------------------------
+Gameboy MBC for Wolf cartridge (MBC1 clone)
+(c)2017 Anders Granlund.
+www.happydaze.se
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+------------------------------------------------------
+
+
+
+--------------------------
+RAM Enable Register
+--------------------------
+(0x0000 - 0x1FFF)
+Write 0x0A to enable SRAM, any other value to disable it
+
+--------------------------
+ROM Bank Register
+--------------------------
+(0x2000 - 0x3FFF)
+Write which ROM bank is mapped to 0x4000-0x7FFF
+				 
+--------------------------
+RAM Bank Register
+--------------------------
+(0x4000 - 0x5FFF)
+Mode0: Write upper two ROM adress lines
+Mode1: Write which RAM bank is mapped to 0xA000-0xBFFF
+EA0-EA1 stay fixed in Mode1, and alternates depending on A14 in Mode0
+					
+--------------------------
+Mode Register
+--------------------------
+(0x6000 - 0x7FFF)
+Select cartridge mode
+Mode0 = 16Mbit ROM /  64Kbit SRAM
+Mode1 =  4Mbit ROM / 256Kbit SRAM
+
+
+--------------------------
+ATF1502 pinout
+--------------------------
+
+					  
+                    I  I     I                                   
+                 I  _  _     _              I  I                 
+                 _  A  A  V  A           G  _  _                 
+                 D  1  1  C  1           N  C  W                 
+                 0  5  4  C  3           D  S  R                 
+               ____________________________________              
+              /  44 43 42 41 40 39 38 37 36 35 34  \             
+         TDI |  1                                33 |            
+        I_D1 |  2                                32 | TDO        
+        I_D2 |  3                                31 |            
+         GND |  4                                30 |            
+        I_D3 |  5                                29 | VCC        
+        I_D4 |  6            ATF1502             28 |            
+         TMS |  7          44-Lead TQFP          27 |            
+       I_RST |  8                                26 | TCK        
+         VCC |  9                                25 |            
+             | 10                                24 | GND        
+    O_RAM_CS | 11                                23 |            
+             |   12 13 14 15 16 17 18 19 20 21 22   |            
+              \____________________________________/             
+                 O  O        G  V  O  O  O  O  O                 
+                 _  _        N  C  _  _  _  _  _                 
+                 E  E        D  C  R  R  R  R  R                 
+                 A  A              A  A  A  A  A                 
+                 0  1              1  1  1  1  1                 
+                                   5  6  8  4  7                  
+                                                					  
+			
+
+--------------------------
+Nintendo MBC1 pinout
+--------------------------
+
+		 ---------------
+	     D0 |  1       24 | VCC
+	     D1 |  2       23 | /CS
+	     D2 |  3       22 | /WR
+	     D3 |  4       21 | A15
+	     D4 |  5       20 | A14
+	    EA0 |  6       19 | A13
+	    EA1 |  7       18 | RA14
+	/RAM_CS |  8       17 | RA15
+	     PD |  9       16 | RA16
+	   /RST |  0       15 | RA17
+	    /RD |  1       14 | RA18
+	    GND |  2       13 | /ROM_CS
+		 ---------------
+
+	notes:
+	/ROM_CS is not used	- route A15 cartridge pin directly to /CS on ROM chip.
+	/RD is not used	- no need as ROM_CS is not used
+					  
+*/
+
+
+
+/************ Inputs ************/
+pin [43,42,40]	= [I_A15..13];
+pin [6,5,3,2,44]	= [I_D4..0];
+pin 34			= !I_WR;
+pin 35			= !I_CS;
+pin 8			= !I_RST;
+pin 10			= !I_RD;
+
+/************ Outputs ************/
+pin 11			= !O_RAM_CS;
+pin [13,12]		= [O_EA1..0];
+pin [20,22,19,18,21]	= [O_RA18..14];
+
+
+/************ Logic ************/
+node mode;
+node ram_enable;
+node rombankD4..0;
+node rambankD1..0;
+
+/* address decoding */
+addr_ram_enable	= !I_A15 & !I_A14 & !I_A13;
+addr_rom_bank		= !I_A15 & !I_A14 &  I_A13;
+addr_ram_bank 	= !I_A15 &  I_A14 & !I_A13;
+addr_mode		= !I_A15 &  I_A14 &  I_A13;
+addr_ram		=  I_A15 & !I_A14 &  I_A13;
+addr_rom		= !I_A15;
+
+/* mode */
+mode.d		= I_D0;
+mode.ck	= !(addr_mode & I_WR);
+
+/* ram enable */
+ram_enable.d 	= !I_D4 & I_D3 & !I_D2 & I_D1 & !I_D0;	/* b'01010 = 0xA */
+ram_enable.ck	= !(addr_ram_enable & I_WR);
+O_RAM_CS 	= addr_ram & ram_enable & I_CS & !I_RST;
+
+/* ram banking */
+rambankD0.d	= I_D0;
+rambankD1.d	= I_D1;
+rambankD0.ck 	= !(addr_ram_bank & I_WR);
+rambankD1.ck 	= !(addr_ram_bank & I_WR);
+rambankenable	= (I_A14 # mode) & !I_RST;
+O_EA0		= rambankD0 & rambankenable;
+O_EA1		= rambankD1 & rambankenable;
+
+/* rom banking */
+rombankD0.d	= I_D0;
+rombankD1.d	= I_D1;
+rombankD2.d	= I_D2;
+rombankD3.d	= I_D3;
+rombankD4.d	= I_D4;
+rombankD0.ck	= !(addr_rom_bank & I_WR);
+rombankD1.ck	= !(addr_rom_bank & I_WR);
+rombankD2.ck	= !(addr_rom_bank & I_WR);
+rombankD3.ck	= !(addr_rom_bank & I_WR);
+rombankD4.ck	= !(addr_rom_bank & I_WR);
+rombankenable	= I_A14 & !I_RST;
+rombankvalid	= rombankD4 # rombankD3 # rombankD2 # rombankD1 # rombankD0;
+O_RA18		= (rombankD4 & rombankvalid) & rombankenable;
+O_RA17		= (rombankD3 & rombankvalid) & rombankenable;
+O_RA16		= (rombankD2 & rombankvalid) & rombankenable;
+O_RA15		= (rombankD1 & rombankvalid) & rombankenable;
+O_RA14		= (rombankD0 # !rombankvalid) & rombankenable;
+
+
+
+
+

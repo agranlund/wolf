@@ -1,0 +1,24 @@
+4	npcs/dog_00.pcx				0
+4	npcs/dog_03.pcx				1
+4	npcs/dog_05.pcx				2
+4	npcs/dog_06.pcx				3
+4	npcs/dog_07.pcx				4
+4	npcs/dog_08.pcx				5
+4	npcs/dog_09.pcx				6
+4	npcs/guard_01.pcx			7
+4	npcs/guard_03.pcx			8
+4	npcs/guard_06.pcx			9
+4	npcs/guard_07.pcx			10
+4	npcs/guard_08.pcx			11
+4	npcs/guard_09.pcx			12
+4	npcs/guard_10.pcx			13
+4	npcs/guard_12.pcx			14
+4	npcs/ss_01.pcx				15
+4	npcs/ss_03.pcx				16
+4	npcs/ss_05.pcx				17
+4	npcs/ss_07.pcx				18
+4	npcs/ss_08.pcx				19
+4	npcs/ss_09.pcx				20
+4	npcs/ss_10.pcx				21
+4	npcs/ss_12.pcx				22
+

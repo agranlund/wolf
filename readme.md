@@ -1,7 +1,7 @@
 ## Wolfenstein 3D for Gameboy Color
  (c)2017 Anders Granlund, www.happydaze.se
 
-A custom Gameboy Color cartridge: ATF1502 CPLD mapper, Kinetis KE04 (Cortex-M0+) as coprocessor working in tamdem with Z80 on Gameboy. Commandlist and framebuffer sharing through dualport ram.
+A custom Gameboy Color cartridge: ATF1502 CPLD mapper, Kinetis KE04 (Cortex-M0+) as coprocessor working in tandem with Z80 on Gameboy. Commandlist and framebuffer sharing through dualport ram.
 
 
 ![Alt text](cart.jpg?raw=true "")

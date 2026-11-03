@@ -1,29 +1,8 @@
 ## Wolfenstein 3D for Gameboy Color
  (c)2017 Anders Granlund, www.happydaze.se
 
-------------------------------------------------------------------------------
+A custom Gameboy Color cartridge: ATF1502 CPLD mapper, Kinetis KE04 (Cortex-M0+) as coprocessor working in tamdem with Z80 on Gameboy. Commandlist and framebuffer sharing through dualport ram.
 
- This hardware and software is free; you can redistribute it and/or
- modify it under the terms of the GNU General Public License
- as published by the Free Software Foundation; either version 2
- of the License, or (at your option) any later version.
-
- It is being distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- The Z80 binary is using FX-Hammer and GBP Player. The authors of
- these must be credited and any of their respective copyright 
- notices and/or disclaimers must be included.
-
- The KE04 binary uses and/or takes inspiration from parts of
- Wolf4SDL source code by Moritz "Ripper" Kroll (http://www.chaos-software.de.vu)
- which was in turn based on Wolfenstein 3D sources released by id Software.
-
- Some data files are derivate from the Wolfenstein 3D shareware package.
-
-------------------------------------------------------------------------------
 
 ![Alt text](cart.jpg?raw=true "")
 
@@ -96,3 +75,27 @@ midis to runtime format. https://github.com/AntonioND/gbt-player
 The converter tool in z80/tools/mod2gbt was built for MacOSX. Please see
 the official GBT-Player Github page if you need to build it for another
 operating system.
+
+
+## License
+
+ This hardware and software is free; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+
+ It is being distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ The Z80 binary is using FX-Hammer and GBP Player. The authors of
+ these must be credited and any of their respective copyright 
+ notices and/or disclaimers must be included.
+
+ The KE04 binary uses and/or takes inspiration from parts of
+ Wolf4SDL source code by Moritz "Ripper" Kroll (http://www.chaos-software.de.vu)
+ which was in turn based on Wolfenstein 3D sources released by id Software.
+
+ Some data files are derivate from the Wolfenstein 3D shareware package.
+
